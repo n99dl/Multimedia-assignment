@@ -9,24 +9,24 @@ class PrefixCodeTree:
     def __init__(self):
         self.treeRoot = TreeNode()
 
-    def insert(self, word, data):
+    def insert(self, codeword, symbol):
         node = self.treeRoot
-        for code in word:
+        for code in codeword:
             code = int(code)
             if code not in node.children:
                 node.children[code] = TreeNode()
             node = node.children[code]
-        node.data = data
+        node.data = symbol
 
-    def decode(self, encoded_data, data_length):
+    def decode(self, encodedData, datalen):
         node = self.treeRoot
         bits = 0
         raw_data = []
-        for i_byte in encoded_data:
+        for i_byte in encodedData:
             bit_lv = 7
             while bit_lv >= 0:
                 bits += 1
-                if bits > data_length:
+                if bits > datalen:
                     break
                 current_bit = 1 if i_byte&(1<<bit_lv)>0 else 0
                 bit_lv -= 1
